@@ -154,9 +154,12 @@ def random_number():
 @login_required
 def update_link():
     if (
-        current_user.link.created + datetime.timedelta(days=LINK_CREATE_DELTA)
+        current_user.link.created + datetime.timedelta(hours=LINK_CREATE_DELTA)
     ) > datetime.datetime.now():
-        flash(message="Можно создавать ссылку каждые 24 часа", category="error")
+        flash(
+            message=f"Можно создавать ссылку каждые {LINK_CREATE_DELTA} часов",
+            category="error",
+        )
         return redirect(url_for("views.home"))
     updated_link = current_user.link
     updated_link.exp_date = datetime.datetime.now() + datetime.timedelta(
