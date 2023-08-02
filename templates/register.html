@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock title %}
+
+{% block body %}
+<p class="h1 text-center">Страница регистрации</p>
+<div class="container">
+    <form method="post">
+        <div class="form-group">
+            <label for="username">Имя пользователя</label>
+            <input class="form-control" type="text" name="username" id="username" placeholder="Имя...">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="email">Электронная почта</label>
+            <input class="form-control" type="email" name="email" id="email" placeholder="Почта...">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input class="form-control" type="password" name="password" id="password" placeholder="***">
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+        <a class="btn btn-secondary" href="{{ url_for('views.login') }}">Войти</a>
+    </form>
+</div>
+{% endblock body %}

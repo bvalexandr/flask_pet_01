@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Логин{% endblock title %}
+
+{% block body %}
+<div class="container">
+    <p class="h1 text-center">Страница входа</p>
+    <form method="post">
+        <div class="form-group">
+            <label for="email">Введите адрес электронной почты</label>
+            <input class="form-control" type="email" name="email" id="email" placeholder="***@***.**">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="password">Введите пароль</label>
+            <input class="form-control" type="password" name="password" id="password">
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Войти</button>
+        <a class="btn btn-secondary" href="{{ url_for('views.register') }}">Зарегистрироваться</a>
+    </form>
+</div>
+{% endblock body %}

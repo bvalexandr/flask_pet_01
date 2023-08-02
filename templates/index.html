@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock title %}
+{% block body %}
+<div class="container">
+    <p class="h3 text-center">Здравствуй {{ user.username }}</p>
+    <form method="post">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="p-2">
+                <label for="link">Уникальная ссылка</label>
+            </div>
+            <div class="p-2 w-50">
+                <input disabled class="form-control" type="text" name="link" id="link"
+                    placeholder="{{ url_for('views.home', _external=True) + user.link.link }}">
+            </div>
+            <div class="p-2" data-bs-toggle="tooltip" data-placement="top" title="Сгенерировать новую ссылку">
+                <a href="{{ url_for('views.update_link') }}">
+                    <i class="fa-solid fa-repeat fa-2xl" style="color: #0d6efd;"></i>
+                </a>
+            </div>
+            <div class="p-2" data-bs-toggle="tooltip" data-placement="top" title="Скопировать в буфер обмена">
+                <i class="fa-solid fa-paste fa-2xl" style="color: #0d6efd;" id="copyIcon"></i>
+            </div>
+        </div>
+    </form>
+    <div class="d-flex align-items-center">
+        <h3 class="p-2">Мне повезет?</h3>
+        <a href="{{ url_for('views.random_number') }}" data-bs-toggle="tooltip" data-placement="top"
+            title="Нажми на иконку, чтобы участвовать в игре">
+            <i class="fa-sharp fa-solid fa-dice fa-2xl" style="color: #0d6efd;"></i>
+        </a>
+    </div>
+    <div class="accordion" id="game">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="gameResults">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGame"
+                    aria-expanded="true" aria-controls="collapseGame">
+                    Посмотреть результаты трех последних игр
+                </button>
+            </h2>
+        </div>
+        <div id="collapseGame" class="accordion-collapse collapse" aria-labelledby="gameResults" data-bs-parent="game">
+            <div class="accordion-body">
+                <ul class="list-group list-group-flush">
+                    {% for number in results %}
+                    <li class="list-group-item">
+                        {{ number.win }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
